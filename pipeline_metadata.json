@@ -1,0 +1,91 @@
+{
+    "pipeline_timestamp": "2025-10-23T23:56:39.616974",
+    "configuration": {
+        "skip_earth_engine": false,
+        "skip_preprocessing": false,
+        "skip_training": false,
+        "epochs": 100,
+        "batch_size": 8,
+        "task": "both",
+        "enable_monitoring": false
+    },
+    "aoi": {
+        "west": 78.0,
+        "south": 20.0,
+        "east": 82.0,
+        "north": 24.0,
+        "region": "Central India",
+        "states": [
+            "Madhya Pradesh",
+            "Chhattisgarh"
+        ]
+    },
+    "deforestation_detection": {
+        "satellite_data": {
+            "source": "Sentinel-2",
+            "cloud_cover_threshold": 20,
+            "time_periods": [
+                "Pre_Monsoon",
+                "Previous_Season"
+            ]
+        },
+        "model": {
+            "architecture": "U-Net",
+            "input_shape": [
+                256,
+                256,
+                6
+            ],
+            "task": "Deforestation Detection"
+        }
+    },
+    "land_cover_classification": {
+        "satellite_data": {
+            "sources": [
+                "Landsat-8/9",
+                "Sentinel-2"
+            ],
+            "cloud_cover_threshold": 20,
+            "export_scale": 30,
+            "tile_size": 256
+        },
+        "model": {
+            "architecture": "Enhanced U-Net",
+            "input_shape": [
+                256,
+                256,
+                6
+            ],
+            "num_classes": 7,
+            "class_names": [
+                "Water",
+                "Urban",
+                "Forest",
+                "Agriculture",
+                "Grassland",
+                "Barren",
+                "Wetland"
+            ],
+            "confidence_threshold": 0.8
+        },
+        "training": {
+            "batch_size": 32,
+            "epochs": 100,
+            "learning_rate": 0.001,
+            "class_weights": {
+                "0": 1.0,
+                "1": 2.0,
+                "2": 1.0,
+                "3": 1.0,
+                "4": 1.5,
+                "5": 2.0,
+                "6": 2.5
+            }
+        },
+        "evaluation": {
+            "min_accuracy": 0.85,
+            "iou_threshold": 0.5,
+            "boundary_thickness": 2
+        }
+    }
+}

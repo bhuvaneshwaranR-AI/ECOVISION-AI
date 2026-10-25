@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Logs
+logs/
+*.log
+
+# Data and models (large files)
+dataset/
+downloads/
+checkpoints/
+model/
+models/checkpoints/
+*.h5
+*.hdf5
+*.pkl
+*.pth
+
+# Credentials
+credentials/
+*.json
+!pipeline_metadata.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+processed_data/
+predictions/
+evaluation_results/
